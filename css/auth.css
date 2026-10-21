@@ -1,0 +1,128 @@
+
+.paginaAutenticacao {
+    display: flex;
+    min-height: 100vh;
+    background: var(--fundo);
+}
+
+#erroAutenticacao {
+    color: var(--perigo);
+    min-height: 22px;
+    margin: 8px 0;
+}
+
+.caixaAutenticacao .botao {
+    width: 100%;
+    justify-content: center;
+}
+
+.caixaAutenticacao form {
+    grid-template-columns: 1fr;
+}
+
+.gradeFormulario .somenteCadastro {
+    display: none;
+}
+
+[data-modo=cadastro] .gradeFormulario .somenteCadastro {
+    display: flex;
+}
+
+.botaoVisitante {
+    display: block;
+    margin: 14px auto 0;
+    color: var(--textoSuave);
+    text-decoration: underline;
+}
+
+
+.bannerAutenticacao {
+    flex: 1.1;
+    background: var(--pessego) no-repeat center top / min(100%, 640px) auto;
+    background-image: url('../Imagens/esquilo-fundo.png');
+    position: relative;
+    color: #fff;
+    display: none;
+    align-items: flex-end;
+    padding: 56px;
+}
+
+
+.bannerAutenticacao:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(44, 62, 28, 0.85), rgba(44, 62, 28, 0) 60%);
+}
+
+.bannerAutenticacao > div {
+    position: relative;
+    max-width: 520px;
+}
+
+.bannerAutenticacao h1 {
+    font-size: 3rem;
+    margin: 18px 0;
+}
+
+.bannerAutenticacao em {
+    color: var(--pessego);
+}
+
+.logoAutenticacao {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font: 800 1.6rem Fraunces, serif;
+}
+
+.logoAutenticacao img {
+    width: auto;
+    height: 46px;
+}
+
+.areaFormularioAutenticacao {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 30px;
+    overflow: auto;
+    background: linear-gradient(var(--floresta) 0 26%, var(--fundo) 26%);
+    padding-top: 12vh;
+}
+
+.caixaAutenticacao {
+    width: min(420px, 100%);
+    background: var(--branco);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: var(--sombra);
+}
+
+.caixaAutenticacao h2 {
+    font-size: 2.2rem;
+    color: var(--floresta);
+    margin-bottom: 16px;
+}
+
+@media (min-width: 900px) {
+
+    .bannerAutenticacao {
+        display: flex;
+    }
+
+    .areaFormularioAutenticacao {
+        background: none;
+        align-items: center;
+        padding: 30px;
+    }
+
+    .caixaAutenticacao {
+        background: none;
+        border-radius: 0;
+        padding: 0;
+        box-shadow: none;
+    }
+}
+

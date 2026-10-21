@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Recuperar senha</title>
+<link rel="icon" type="image/svg+xml" href="Imagens/icons/esquilo-logo.svg">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/auth.css">
+<link rel="stylesheet" href="css/bewell.css">
+<script src="js/receitas-data.js" defer></script>
+<script src="js/app.js" defer></script>
+</head>
+<body data-pagina="recuperar">
+<div class="paginaAutenticacao">
+  <div class="bannerAutenticacao">
+    <div>
+      <div class="logoAutenticacao"><a href="index.html" title="Ir para o início" aria-label="BeHealthier — ir para o início"><img src="Imagens/icons/esquilo-logo.svg" alt="BeHealthier"></a></div>
+      <h1>Esqueceu a senha?<br><em>Vamos criar outra.</em></h1>
+      <p>Confirme seu nome e e-mail e escolha uma nova senha.</p>
+    </div>
+  </div>
+  <div class="areaFormularioAutenticacao">
+    <div class="caixaAutenticacao">
+      <h2>Recuperar senha</h2>
+      <form class="gradeFormulario" id="recuperarForm" onsubmit="return false">
+        <label>Nome completo<input id="nome" name="nome" autocomplete="name" required></label>
+        <label>E-mail<input id="email" name="email" type="email" autocomplete="email" required></label>
+        <label>Nova senha<input id="novaSenha" name="novaSenha" type="password" minlength="6" autocomplete="new-password" required></label>
+        <button class="botao" type="submit">Redefinir senha</button>
+      </form>
+      <a class="botaoVisitante" href="login.html">Lembrou a senha? Entrar</a>
+    </div>
+  </div>
+</div>
+<div class="sobreposicao" id="sobreposicaoModal"><div class="caixaModal" id="caixaModalConteudo"></div></div>
+<div class="aviso" id="avisoTemporario"></div>
+<script type="module" src="js/recuperarSenha.js"></script>
+</body>
+</html>

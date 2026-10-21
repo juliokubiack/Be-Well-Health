@@ -1,0 +1,1895 @@
+:root {
+    --floresta: #395224;
+    --florestaRodape: #2f4620;
+    --folha: #5e7745;
+    --salvia: #9ab17a;
+    --salviaSuave: #e6ecde;
+    --tinta: #2c3e1c;
+    --pessego: #ffe4be;
+    --areia: #e4dfb5;
+    --fundo: #fff6e8;
+    --branco: #fff;
+    --textoSuave: #66704f;
+    --borda: var(--areia);
+    --perigo: #c2453a;
+    --ambar: #feba4f;
+    --ambarEscuro: #feba4f;
+    --ambarSuave: rgba(254, 186, 79, 0.25);
+    --sombra: 0 8px 28px rgba(44, 62, 28, 0.14);
+    font-family: 'DM Sans', system-ui, sans-serif;
+    color: var(--tinta);
+}
+
+body {
+    background: var(--fundo);
+}
+
+h1,
+h2,
+h3 {
+    font-family: Fraunces, Georgia, serif;
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+h2 {
+    font-size: 1.9rem;
+}
+
+h4 {
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+select {
+    font: inherit;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    border: 0;
+    background: none;
+}
+
+#aplicacao {
+    display: block;
+    min-height: 100vh;
+    width: 100%;
+}
+
+#aplicacao > div {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    min-width: 0;
+}
+
+main {
+    flex: 1 0 auto;
+    padding: 16px 16px 0;
+    min-width: 0;
+    width: 100%;
+}
+
+@media (min-width: 900px) {
+
+    #aplicacao {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+    }
+
+    main {
+        padding: 34px 44px 0;
+    }
+}
+
+#barraSuperior {
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--floresta);
+    color: #fff;
+    padding: 12px 16px;
+    padding-top: calc(12px + env(safe-area-inset-top));
+    align-items: center;
+    justify-content: space-between;
+}
+
+#barraSuperior .logo {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font: 800 1.25rem Fraunces, serif;
+}
+
+#barraSuperior .logo img {
+    width: auto;
+    height: 26px;
+}
+
+#barraSuperior .botaoCidade {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 7px 13px;
+    border-radius: 99px;
+    font-size: 0.85rem;
+}
+
+#barraSuperior .botaoSacola {
+    background: var(--ambar);
+    color: var(--tinta);
+    font-weight: 700;
+    padding: 8px 14px;
+    border-radius: 99px;
+}
+
+#menuInferior {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--branco);
+    border-top: 1px solid var(--borda);
+    z-index: 30;
+    padding: 6px 4px calc(6px + env(safe-area-inset-bottom));
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.06);
+}
+
+#menuInferior a {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.68rem;
+    gap: 2px;
+    color: var(--textoSuave);
+    padding: 4px 0;
+    font-weight: 500;
+}
+
+#menuInferior a span {
+    font-size: 1.4rem;
+}
+
+#menuInferior a.ativo {
+    color: var(--folha);
+    font-weight: 700;
+}
+.vdos {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+.vdos li {
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 18px;
+    padding: 12px;
+    min-width: 0;
+    box-shadow: 0 2px 8px rgba(44, 62, 28, 0.08),
+                0 6px 18px rgba(44, 62, 28, 0.06);
+}
+.vdos iframe {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    border-radius: 12px;
+}
+
+@media (min-width: 900px) {
+
+    #barraSuperior,
+    #menuInferior {
+        display: none;
+    }
+    .vdos,
+    .gradeVideos {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
+}
+
+#menuLateral {
+    display: none;
+}
+
+@media (min-width: 900px) {
+
+    #menuLateral {
+        background: var(--floresta);
+        color: #fff;
+        position: sticky;
+        top: 0;
+        align-self: start;
+        height: 100vh;
+        height: 100dvh;
+        max-height: 100%;
+        overflow-y: auto;
+        padding: 26px 16px 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    #menuLateral > * {
+        flex-shrink: 0;
+    }
+
+    #menuLateral .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font: 800 1.5rem Fraunces, serif;
+        margin-bottom: 22px;
+        padding: 0 8px;
+    }
+
+    #menuLateral .logo img {
+        width: auto;
+        height: 40px;
+    }
+
+    #menuLateral a {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        padding: 11px 14px;
+        border-radius: 12px;
+        font-weight: 500;
+        opacity: 0.85;
+        transition: 0.2s;
+    }
+
+    #menuLateral a:hover {
+        background: rgba(255, 255, 255, 0.1);
+        opacity: 1;
+    }
+
+    #menuLateral a.ativo {
+        background: var(--salvia);
+        color: var(--tinta);
+        opacity: 1;
+        font-weight: 700;
+    }
+
+    #menuLateral .rodapeMenuLateral {
+        margin-top: auto;
+        font-size: 0.8rem;
+        opacity: 0.6;
+        padding: 0 8px;
+    }
+
+    .seloContador {
+        background: var(--ambar);
+        color: var(--tinta);
+        border-radius: 99px;
+        font-size: 0.72rem;
+        padding: 1px 7px;
+        font-weight: 700;
+    }
+
+    .caixaUsuario {
+        margin-top: auto;
+        padding: 12px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.1);
+        font-size: 0.85rem;
+        overflow-wrap: anywhere;
+    }
+
+    .caixaUsuario b {
+        display: block;
+    }
+
+    .caixaUsuario button {
+        margin-top: 8px;
+        color: var(--pessego);
+        font-weight: 700;
+    }
+}
+
+.botao {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--floresta);
+    color: #fff;
+    padding: 13px 24px;
+    border-radius: 99px;
+    font-weight: 700;
+    transition: 0.2s;
+}
+
+.botao:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+}
+
+.botao.botaoContornoClaro {
+    background: transparent;
+    border: 2px solid #fff;
+    margin: 8px 0 0;
+}
+
+.botao.botaoAmarelo {
+    background: var(--ambar);
+    color: var(--tinta);
+    box-shadow: 0 4px 12px rgba(254, 186, 79, 0.35);
+}
+
+.botao.botaoPequeno {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+.botao.botaoContorno {
+    background: var(--branco);
+    color: var(--floresta);
+    border: 2px solid var(--floresta);
+}
+
+.iconeSacolaTopo {
+    width: 1.2em;
+    height: 1.2em;
+    vertical-align: -0.25em;
+}
+
+.iconeBotaoSacola {
+    width: 1.1em;
+    height: 1.1em;
+    vertical-align: -0.2em;
+}
+
+@media (min-width: 900px) {
+
+    .botao.botaoContornoClaro {
+        margin: 0 0 0 8px;
+    }
+}
+
+.tituloPagina {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin-bottom: 20px;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.tituloPagina h2 {
+    font-size: 1.6rem;
+    color: var(--floresta);
+}
+
+.tituloPagina p {
+    color: var(--textoSuave);
+}
+
+h3 {
+    font-size: 1.4rem;
+    margin: 26px 0 14px;
+    color: var(--floresta);
+}
+
+.textoSecundario {
+    font-size: 0.82rem;
+    color: var(--textoSuave);
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+p.textoSecundario {
+    display: block;
+}
+
+.textoSecundario b {
+    color: var(--tinta);
+    background: var(--ambarSuave);
+    border-radius: 99px;
+    padding: 1px 8px;
+}
+
+.tituloPainel {
+    margin-top: 0;
+}
+
+@media (min-width: 900px) {
+
+    .tituloPagina h2 {
+        font-size: clamp(1.7rem, 3vw, 2.4rem);
+    }
+}
+
+.estadoVazio {
+    text-align: center;
+    padding: 50px 20px;
+    color: var(--textoSuave);
+}
+
+@media (min-width: 900px) {
+
+    .estadoVazio.painel {
+        padding: 50px 20px;
+    }
+}
+
+.painel {
+    background: var(--branco);
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: var(--sombra);
+    margin-bottom: 20px;
+}
+
+.duasColunas {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.tresColunas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.painel p {
+    margin-bottom: 6px;
+}
+
+@media (min-width: 900px) {
+
+    .painel {
+        padding: 24px;
+        border-radius: 22px;
+    }
+
+    .duasColunas {
+        grid-template-columns: 1.4fr 1fr;
+    }
+
+    .tresColunas {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 900px) and (max-width: 1100px) {
+
+    .duasColunas {
+        grid-template-columns: 1fr;
+    }
+}
+
+.sobreposicao {
+    position: fixed;
+    inset: 0;
+    background: rgba(44, 62, 28, 0.55);
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 50;
+    padding: 0;
+    backdrop-filter: blur(3px);
+}
+
+.sobreposicao.ativo {
+    display: flex;
+}
+
+.caixaModal {
+    background: var(--branco);
+    border-radius: 26px 26px 0 0;
+    width: min(720px, 100%);
+    max-height: 92vh;
+    overflow: auto;
+    position: relative;
+}
+
+.caixaModal .conteudoModal {
+    padding: 26px;
+}
+
+.caixaModal > img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.botaoFecharModal {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #fff;
+    font-size: 1.3rem;
+    z-index: 2;
+    box-shadow: var(--sombra);
+}
+
+.caixaModal pre {
+    font: inherit;
+    white-space: pre-wrap;
+    background: var(--fundo);
+    padding: 14px;
+    border-radius: 12px;
+    margin: 8px 0 14px;
+}
+
+.iconeMais {
+    width: 30px;
+    height: 30px;
+    flex: none;
+    display: block;
+}
+
+.caixaModal > .imagemIa {
+    position: relative;
+    display: block;
+}
+
+.caixaModal > .imagemIa > img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.seloIa {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    max-width: calc(100% - 24px);
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+    pointer-events: none;
+}
+
+.linhaItem img.iconeMais {
+    width: 28px;
+    height: 28px;
+    border-radius: 0;
+    object-fit: contain;
+    margin: 0 4px;
+}
+
+.textoSecundario.textoModalConfirmacao {
+    margin: 8px 0 18px;
+    font-size: 1rem;
+}
+
+.textoSecundario.resumoNutricionalModal {
+    margin: 8px 0 16px;
+    font-size: 0.95rem;
+}
+
+.resumoSacola {
+    margin: 14px 0;
+}
+
+.botao.botaoFinalizarPedido {
+    margin-top: 16px;
+    width: 100%;
+    justify-content: center;
+}
+
+#formularioPedido {
+    grid-template-columns: 1fr 1fr;
+}
+
+.numeroGrande.totalSacola {
+    font-size: 1.6rem;
+}
+
+.linhaItem.linhaItemSelecionavel {
+    cursor: pointer;
+}
+
+@media (min-width: 900px) {
+
+    .sobreposicao {
+        align-items: center;
+        padding: 20px;
+    }
+
+    .caixaModal {
+        border-radius: 26px;
+        max-height: 88vh;
+    }
+
+    .caixaModal > img {
+        height: 260px;
+    }
+
+    .caixaModal > .imagemIa > img {
+        height: 260px;
+    }
+}
+
+.aviso {
+    position: fixed;
+    left: 50%;
+    bottom: 100px;
+    transform: translateX(-50%);
+    background: var(--floresta);
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: 99px;
+    z-index: 99;
+    box-shadow: var(--sombra);
+    font-weight: 500;
+    transition: 0.3s;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.aviso.ativo {
+    opacity: 1;
+}
+
+@media (min-width: 900px) {
+
+    .aviso {
+        bottom: 90px;
+    }
+}
+
+.bannerPrincipal {
+    position: relative;
+    border-radius: 22px;
+    min-height: 44vh;
+    background: var(--pessego) no-repeat right top / auto 100%;
+    color: #fff;
+    display: flex;
+    align-items: flex-end;
+    padding: 24px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.bannerPrincipal:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(100deg, rgba(44, 62, 28, 0.92) 25%, rgba(44, 62, 28, 0) 70%);
+}
+
+.bannerPrincipal > div {
+    position: relative;
+    max-width: 620px;
+}
+
+.bannerPrincipal h1 {
+    font-size: clamp(2.3rem, 5vw, 4.2rem);
+    font-weight: 800;
+    margin-bottom: 14px;
+}
+
+.bannerPrincipal h1 em {
+    color: var(--pessego);
+    font-style: italic;
+}
+
+.bannerPrincipal .botao:not(.botaoContornoClaro) {
+    background: var(--ambar);
+    color: var(--tinta);
+}
+
+.bannerPrincipal p {
+    font-size: 1rem;
+    opacity: 0.92;
+    margin-bottom: 24px;
+}
+
+.estatisticas {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: -8px 0 34px;
+}
+
+.estatisticas div {
+    flex: 1;
+    min-width: 44%;
+    background: var(--branco);
+    border-radius: 18px;
+    padding: 14px;
+    box-shadow: var(--sombra);
+}
+
+.estatisticas b {
+    font: 800 1.5rem Fraunces, serif;
+    color: var(--ambarEscuro);
+    display: block;
+}
+
+.gradeDestaques {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.cardDestaque {
+    position: relative;
+    border-radius: 22px;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    color: #fff;
+    background: var(--tinta) center / cover;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+.cardDestaque:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--sombra);
+}
+
+.cardDestaque:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(44, 62, 28, 0.85), transparent 60%);
+}
+
+.cardDestaque div {
+    position: relative;
+}
+
+.cardDestaque b {
+    font: 800 1.4rem Fraunces, serif;
+    display: block;
+}
+
+#saudacaoUsuario {
+    margin-bottom: 8px !important;
+}
+
+#saudacaoUsuario:empty {
+    display: none;
+}
+
+.bannerPrincipal.bannerInicio {
+    background-image: url('../Imagens/esquilo-fundo.png');
+}
+
+.cardDestaque.cardDestaqueReceitas {
+    background-image: url('../Imagens/frutas.jpg');
+}
+
+.cardDestaque.cardDestaqueCardapio {
+    background-image: url('../Imagens/mesa.jpg');
+}
+
+.cardDestaque.cardDestaqueEquilibrio {
+    background-image: url('../Imagens/equilibrio.jpg');
+}
+
+.cardDestaque.cardDestaqueEntrega {
+    background-image: url('../Imagens/marmitas-row.jpg');
+}
+
+@media (max-width: 600px) {
+
+    .bannerPrincipal {
+        background-position: right top;
+        background-size: 90% auto;
+        min-height: 560px;
+    }
+
+    .bannerPrincipal:before {
+        background: linear-gradient(0deg, rgba(44, 62, 28, 0.94) 38%, rgba(44, 62, 28, 0) 72%);
+    }
+}
+
+@media (min-width: 900px) {
+
+    .bannerPrincipal {
+        min-height: 58vh;
+        padding: 48px;
+        border-radius: 28px;
+        margin-bottom: 34px;
+    }
+
+    .bannerPrincipal p {
+        font-size: 1.15rem;
+    }
+
+    .estatisticas div {
+        min-width: 150px;
+        padding: 18px 20px;
+    }
+
+    .estatisticas b {
+        font: 800 2rem Fraunces, serif;
+    }
+
+    .gradeDestaques {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+    }
+}
+
+@media (min-width: 900px) and (max-width: 1100px) {
+
+    .gradeDestaques {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.gradeReceitas {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.cardReceita {
+    background: var(--branco);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--sombra);
+    cursor: pointer;
+    position: relative;
+    transition: 0.25s;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 112px;
+}
+
+.cardReceita:hover {
+    transform: translateY(-5px);
+}
+
+.cardReceita img {
+    width: 112px;
+    aspect-ratio: auto;
+    object-fit: cover;
+    display: block;
+    height: auto;
+    min-height: 112px;
+    flex: none;
+}
+
+.corpoCardReceita {
+    padding: 12px 44px 12px 14px;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    justify-content: center;
+}
+
+.corpoCardReceita h4 {
+    font-size: 1rem;
+    line-height: 1.25;
+    min-height: 0;
+    overflow-wrap: anywhere;
+}
+
+.corpoCardReceita .textoSecundario {
+    margin-top: 0;
+    align-items: center;
+}
+
+.corpoCardReceita .preco {
+    margin-top: 0;
+}
+
+.botaoFavoritar {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.95);
+    font-size: 1.1rem;
+    color: #bbb;
+    display: grid;
+    place-items: center;
+}
+
+.botaoFavoritar.ativo {
+    color: var(--perigo);
+}
+
+.preco {
+    font-weight: 700;
+    color: var(--floresta);
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.areaVerMais {
+    text-align: center;
+    margin-top: 20px;
+}
+
+@media (min-width: 900px) {
+
+    .gradeReceitas {
+        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+        gap: 20px;
+    }
+
+    .cardReceita {
+        flex-direction: column;
+        border-radius: 20px;
+        align-items: normal;
+        min-height: auto;
+    }
+
+    .cardReceita img {
+        width: 100%;
+        height: auto;
+        min-height: auto;
+        aspect-ratio: 4 / 3;
+        flex: 0 1 auto;
+    }
+
+    .corpoCardReceita {
+        padding: 14px 16px 16px;
+        justify-content: normal;
+    }
+
+    .corpoCardReceita h4 {
+        min-height: 2.5em;
+    }
+
+    .corpoCardReceita .textoSecundario {
+        margin-top: auto;
+    }
+
+    .botaoFavoritar {
+        top: 10px;
+        right: 10px;
+        width: 36px;
+        height: 36px;
+    }
+}
+
+.barraFerramentas {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+    align-items: center;
+}
+
+.barraFerramentas input,
+.barraFerramentas select,
+.gradeFormulario input,
+.gradeFormulario select {
+    padding: 12px 16px;
+    border: 2px solid var(--borda);
+    border-radius: 14px;
+    background: var(--branco);
+    outline: 0;
+    min-width: 0;
+}
+
+.barraFerramentas input {
+    flex: 1 1 100%;
+    min-width: 200px;
+    width: 100%;
+}
+
+.barraFerramentas .botao {
+    flex: 1 1 auto;
+    justify-content: center;
+}
+
+.barraFerramentas select {
+    flex: 1 1 100%;
+    width: 100%;
+}
+
+.botaoOpcao {
+    padding: 8px 16px;
+    border-radius: 99px;
+    background: var(--branco);
+    border: 2px solid var(--borda);
+    font-size: 0.9rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.botaoOpcao.ativo {
+    background: var(--floresta);
+    color: #fff;
+    border-color: var(--floresta);
+}
+
+.botaoOpcao.ativo[data-acao='filtroFavoritas'] {
+    background: var(--ambar);
+    border-color: var(--ambar);
+    color: var(--tinta);
+}
+
+.listaOpcoes {
+    display: flex;
+    gap: 8px;
+    flex-wrap: nowrap;
+    margin-bottom: 18px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+}
+
+@media (min-width: 900px) {
+
+    .barraFerramentas {
+        flex-wrap: wrap;
+    }
+
+    .barraFerramentas input {
+        flex: 1;
+        width: auto;
+    }
+
+    .barraFerramentas .botao {
+        flex: 0 1 auto;
+        justify-content: normal;
+    }
+
+    .barraFerramentas select {
+        flex: 0 1 auto;
+        width: auto;
+    }
+
+    .listaOpcoes {
+        flex-wrap: wrap;
+        overflow-x: visible;
+        padding-bottom: 0;
+    }
+}
+
+.barraProgresso {
+    height: 11px;
+    background: var(--areia);
+    border-radius: 9px;
+    overflow: hidden;
+    margin: 6px 0 14px;
+}
+
+.barraProgresso i {
+    display: block;
+    width: var(--largura, 0%);
+    height: 100%;
+    background: var(--ambar);
+    border-radius: 9px;
+    transition: width 0.5s;
+}
+
+.barraProgresso i.acimaDaMeta {
+    background: var(--perigo);
+}
+
+.numeroGrande {
+    font: 800 2.6rem Fraunces, serif;
+    color: var(--ambarEscuro);
+}
+
+.linhaItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--borda);
+}
+
+.linhaItem img {
+    width: 54px;
+    height: 54px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.linhaItem div {
+    flex: 1;
+    min-width: 0;
+}
+
+.linhaItem b {
+    font-size: 0.95rem;
+    display: block;
+}
+
+.botaoRemover {
+    color: var(--perigo);
+    font-size: 1.3rem;
+    padding: 6px;
+}
+
+.cabecalhoRefeicao {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+}
+
+.cabecalhoRefeicao h4 {
+    color: var(--floresta);
+    font-size: 1.05rem;
+}
+
+.textoSecundario.refeicaoVazia {
+    padding: 10px 0;
+}
+
+.metaCaloriasDia {
+    font-size: 1rem;
+    color: var(--textoSuave);
+}
+
+.painelSemana {
+    margin-top: 20px;
+}
+
+.estatisticasSemana {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.estatisticasSemana .numeroGrande {
+    font-size: 1.7rem;
+}
+
+.linhaDiaSemana {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 12px;
+    text-align: left;
+}
+
+.linhaDiaSemana.ativo {
+    background: var(--ambarSuave);
+}
+
+.linhaDiaSemana b {
+    width: 34px;
+    color: var(--floresta);
+}
+
+.linhaDiaSemana .barraProgresso {
+    flex: 1;
+    margin: 0;
+}
+
+.linhaDiaSemana span {
+    width: 80px;
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--textoSuave);
+}
+
+.blocoCompras {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--borda);
+}
+
+.blocoCompras h4 {
+    color: var(--floresta);
+}
+
+.itemCompra {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 5px 0;
+    cursor: pointer;
+}
+
+.itemCompra input:checked + span {
+    text-decoration: line-through;
+    color: var(--textoSuave);
+}
+
+@media (min-width: 900px) {
+
+    .linhaDiaSemana span {
+        width: 100px;
+    }
+}
+
+.gradeFormulario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.gradeFormulario > * {
+    min-width: 0;
+}
+
+.gradeFormulario input,
+.gradeFormulario select {
+    width: 100%;
+}
+
+.grupoCheckbox {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.grupoCheckbox > b {
+    width: 100%;
+    color: var(--floresta);
+    font-size: 0.85rem;
+}
+
+.gradeFormulario .itemCheckbox {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border: 2px solid var(--borda);
+    border-radius: 99px;
+    background: var(--branco);
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.gradeFormulario .itemCheckbox input {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    accent-color: var(--ambarEscuro);
+    flex: none;
+}
+
+.gradeFormulario .itemCheckbox:has(input:checked) {
+    border-color: var(--ambar);
+    background: var(--ambarSuave);
+}
+
+.gradeFormulario label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--floresta);
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.gradeFormulario .larguraTotal {
+    grid-column: 1 / -1;
+}
+
+.graficoSemanal {
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+    height: 180px;
+    margin-top: 10px;
+}
+
+.graficoSemanal div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    height: 100%;
+    font-size: 0.8rem;
+    gap: 6px;
+}
+
+.graficoSemanal i {
+    width: 100%;
+    height: var(--altura, 0%);
+    background: var(--folha);
+    border-radius: 10px 10px 4px 4px;
+    min-height: 4px;
+}
+
+.graficoSemanal i.acimaDaMeta {
+    background: var(--perigo);
+}
+
+.graficoSemanal .diaAtual {
+    font-weight: 700;
+    color: var(--floresta);
+}
+
+.alerta {
+    background: var(--pessego);
+    border-left: 5px solid var(--folha);
+    padding: 16px 18px;
+    border-radius: 14px;
+    margin-bottom: 16px;
+}
+
+.textoSecundario.resumoDiaEquilibrio {
+    margin-top: 10px;
+}
+
+@media (max-width: 420px) {
+
+    .gradeFormulario {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 900px) {
+
+    .gradeFormulario {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+    }
+}
+
+input:focus,
+select:focus {
+    border-color: var(--folha);
+}
+
+.cardDica {
+    display: flex;
+    gap: 14px;
+    background: var(--branco);
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: var(--sombra);
+}
+
+.cardDica span {
+    font-size: 1.8rem;
+}
+
+.cardDica h3 {
+    margin: 0 0 6px;
+    font-size: 1.1rem;
+}
+
+.gradeReceitas.gradeDicas {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.opcaoCidade {
+    cursor: pointer;
+    border: 2px solid var(--borda);
+    background: var(--branco);
+    border-radius: 20px;
+    padding: 18px;
+    text-align: left;
+}
+
+.opcaoCidade.ativo {
+    border-color: var(--folha);
+    background: var(--salviaSuave);
+}
+
+.opcaoCidade b {
+    font: 800 1.2rem Fraunces, serif;
+    display: block;
+}
+
+.etapasPedido {
+    display: flex;
+    gap: 6px;
+    margin-top: 14px;
+}
+
+.etapasPedido div {
+    flex: 1;
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--textoSuave);
+}
+
+.etapasPedido i {
+    display: block;
+    height: 8px;
+    border-radius: 9px;
+    background: var(--borda);
+    margin-bottom: 6px;
+}
+
+.etapasPedido .etapaConcluida {
+    color: var(--floresta);
+    font-weight: 700;
+}
+
+.etapasPedido .etapaConcluida i {
+    background: var(--folha);
+}
+
+.iconeLocalizacao {
+    width: 1.1em;
+    height: 1.1em;
+    vertical-align: -0.2em;
+    filter: brightness(0) opacity(0.7);
+}
+
+.tresColunas.listaCidades {
+    margin-bottom: 24px;
+}
+
+.botao.botaoNovoPedido {
+    margin-top: 14px;
+}
+
+.secaoVideos {
+    text-align: center;
+}
+
+.gradeVideos {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.gradeVideos iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    border-radius: 18px;
+}
+
+@media (min-width: 900px) {
+
+    .gradeVideos {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
+}
+
+.gradeMissaoValores {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+.tituloSecao {
+    margin: 8px 0 14px;
+}
+
+.tituloSecao h3 {
+    margin-bottom: 2px;
+}
+
+.gradeEquipe {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.cardMembro {
+    background: var(--branco);
+    border-radius: 16px;
+    padding: 12px;
+    box-shadow: var(--sombra);
+    text-align: center;
+}
+
+.fotoMembro {
+    display: block;
+    width: 112px;
+    height: 112px;
+    object-fit: cover;
+    border-radius: 50%;
+    background: var(--salviaSuave);
+    margin: 0 auto 8px;
+}
+
+.nomeMembro {
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+
+.nomeMembro a {
+    color: inherit;
+}
+
+.nomeMembro a:hover {
+    text-decoration: underline;
+    color: var(--folha);
+}
+
+.descricaoMembro {
+    color: var(--textoSuave);
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+@media (min-width: 900px) {
+
+    .gradeMissaoValores {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 8px;
+    }
+
+    .gradeEquipe {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    .cardMembro {
+        padding: 16px;
+        border-radius: 18px;
+    }
+
+    .fotoMembro {
+        width: 150px;
+        height: 150px;
+    }
+}
+
+.rodape {
+    background: var(--florestaRodape);
+    color: #fff;
+    padding: 28px 22px calc(96px + env(safe-area-inset-bottom));
+    margin: 36px 0 0;
+}
+
+.rodapeConteudo {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 26px;
+}
+
+.rodapeLogo {
+    width: auto;
+    height: 40px;
+    margin-bottom: 12px;
+}
+
+.rodapeMarca p {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    opacity: 0.85;
+    margin: 0 0 8px;
+}
+
+.rodapeTitulo {
+    font: 800 1.05rem Fraunces, serif;
+    color: var(--pessego);
+    margin: 0 0 12px;
+}
+
+.rodapeEquipe {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto repeat(3, auto);
+    grid-auto-flow: column;
+    gap: 6px 16px;
+    margin-top: 18px;
+    align-content: start;
+}
+
+.rodapeEquipe .rodapeTitulo {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    margin-bottom: 6px;
+}
+
+.rodapeNavegacao {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 16px;
+    align-content: start;
+}
+
+.rodapeNavegacao .rodapeTitulo {
+    grid-column: 1 / -1;
+    margin-bottom: 6px;
+}
+
+.rodapeNavegacao a,
+.rodapeEquipe a {
+    font-size: 0.92rem;
+    opacity: 0.85;
+    padding: 4px 0;
+    transition: 0.2s;
+}
+
+.rodapeNavegacao a:hover,
+.rodapeEquipe a:hover {
+    opacity: 1;
+    color: var(--salvia);
+}
+
+.rodapeConta {
+    display: grid;
+    gap: 4px;
+    align-content: start;
+    justify-items: start;
+    font-size: 0.92rem;
+    overflow-wrap: anywhere;
+}
+
+.rodapeConta .detalheUsuario {
+    opacity: 0.85;
+}
+
+.rodapeConta .botaoUsuario {
+    margin-top: 8px;
+    color: var(--pessego);
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.rodapeLembrete {
+    align-content: start;
+}
+
+.rodapeContato {
+    display: grid;
+    gap: 6px;
+    margin-top: 22px;
+    align-content: start;
+    overflow-wrap: anywhere;
+}
+
+.rodapeContato .rodapeTitulo {
+    margin-bottom: 6px;
+}
+
+.rodapeContato a {
+    font-size: 0.92rem;
+    opacity: 0.85;
+    padding: 4px 0;
+    transition: 0.2s;
+}
+
+.rodapeContato a:hover {
+    opacity: 1;
+    color: var(--salvia);
+}
+
+.rodapeContato p {
+    margin: 0;
+    font-size: 0.92rem;
+    opacity: 0.85;
+    padding: 4px 0;
+}
+
+.rodapeDireitos {
+    margin: 24px 0 0;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    opacity: 0.9;
+    text-align: center;
+}
+
+@media (min-width: 900px) {
+
+    .rodape {
+        padding: 40px 44px 22px;
+        margin: 56px 0 0;
+    }
+
+    .rodapeConteudo {
+        grid-template-columns: 1.7fr 1.1fr 1fr 1.3fr;
+        gap: 36px;
+    }
+
+    .rodapeDireitos {
+        text-align: center;
+    }
+}
+
+.logo a,
+.logoAutenticacao a,
+.rodapeLogoLink {
+    display: inline-flex;
+    align-items: center;
+    padding: 0;
+    background: none;
+    opacity: 1;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.logo a:hover,
+.logoAutenticacao a:hover,
+.rodapeLogoLink:hover {
+    transform: scale(1.04);
+}
+
+#menuLateral .logo a,
+#menuLateral .logo a:hover {
+    padding: 0;
+    background: none;
+    opacity: 1;
+}
+
+.gradeFormulario textarea,
+.rodapeFormulario input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--borda);
+    border-radius: 14px;
+    background: var(--branco);
+    color: var(--tinta);
+    font: inherit;
+    outline: 0;
+    resize: vertical;
+}
+
+.gradeFormulario textarea:focus,
+.rodapeFormulario input:focus {
+    border-color: var(--folha);
+}
+
+.botoesFormulario {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.campoInvalido {
+    border-color: var(--perigo) !important;
+}
+
+.retornoFormulario,
+.rodapeFormularioRetorno {
+    font-size: 0.88rem;
+    font-weight: 700;
+    margin: 10px 0 0;
+    min-height: 1.2em;
+}
+
+.retornoFormulario.erro {
+    color: var(--perigo);
+}
+
+.retornoFormulario.sucesso {
+    color: var(--folha);
+}
+
+.rodapeFormulario {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.rodapeFormulario .botao {
+    justify-self: start;
+}
+
+.rodapeFormularioRetorno {
+    margin: 0;
+    color: var(--pessego);
+}
+
+.rodapeFormularioRetorno.erro {
+    color: #ffb4ab;
+}
+
+@media (min-width: 900px) {
+
+    .colunasContato {
+        grid-template-columns: 1.6fr 1fr;
+    }
+
+}
+
+.listaCanais {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.canalContato {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border: 1px solid var(--borda);
+    border-radius: 14px;
+    background: var(--fundo);
+    color: var(--tinta);
+    text-decoration: none;
+}
+
+a.canalContato:hover {
+    background: var(--salviaSuave);
+}
+
+.canalContato b {
+    display: block;
+}
+
+.canalContato small {
+    display: block;
+    color: var(--textoSuave);
+    overflow-wrap: anywhere;
+}
+
+.canalIcone {
+    flex: none;
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--branco);
+    font-size: 18px;
+}
+
+.canalIcone img {
+    width: 20px;
+    height: 20px;
+}
+
+.gradeFaq {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.itemFaq {
+    background: var(--branco);
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: var(--sombra);
+}
+
+.itemFaq summary {
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--floresta);
+}
+
+.itemFaq p {
+    margin: 10px 0 0;
+    color: var(--textoSuave);
+}
+
+.painelEquipeContato a {
+    color: var(--floresta);
+    font-weight: 700;
+}
+
+@media (min-width: 900px) {
+
+    .gradeFaq {
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+    }
+}
+
+[hidden] {
+    display: none !important;
+}
+

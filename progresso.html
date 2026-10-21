@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Be Well — Progresso</title>
+<link rel="icon" href="bewell/img_sobre-nos/cerebro-pensnte-pequeno.png">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/auth.css">
+<link rel="stylesheet" href="css/bewell.css">
+<script type="module" src="js/ponte.js"></script>
+<script src="js/receitas-data.js" defer></script>
+<script src="js/app.js" defer></script>
+</head>
+<body data-pagina="progresso">
+<div id="aplicacao">
+<aside id="menuLateral">
+      <div class="logo"><a href="index.html" title="Ir para o início" aria-label="BeHealthier — ir para o início"><img src="Imagens/icons/esquilo-logo.svg" alt="BeHealthier"></a></div>
+      <p class="grupoMenu">BeHealthier</p>
+      <a href="index.html"><span><img src="Imagens/icons/casa.svg" alt=""></span>Início</a>
+      <a href="receitas.html"><span><img src="Imagens/icons/receitas.svg" alt=""></span>Receitas</a>
+      <a href="cardapio.html"><span><img src="Imagens/icons/Calendar_Event.svg" alt=""></span>Cardápio</a>
+      <a href="equilibrio.html"><span><img src="Imagens/icons/equilibrio.svg" alt=""></span>Equilíbrio</a>
+      <a href="dicas.html"><span><img src="Imagens/icons/lampada.svg" alt=""></span>Dicas</a>
+      <a href="entrega.html"><span><img src="Imagens/icons/entrega.svg" alt=""></span>Entrega <span class="seloContador contadorSacola" hidden></span></a>
+      <a href="videos.html"><span><img src="Imagens/icons/Play.svg" alt=""></span>Vídeos</a>
+      <p class="grupoMenu grupoBeWell"><img src="bewell/img_sobre-nos/cerebro-pensnte-pequeno.png" alt="">Be Well</p>
+      <a href="bewell.html"><span><img src="Imagens/icons/bewell.svg" alt=""></span>Be Well</a>
+      <a href="rotina.html"><span><img src="Imagens/icons/rotina.svg" alt=""></span>Rotina</a>
+      <a href="exercicios.html"><span><img src="Imagens/icons/exercicios.svg" alt=""></span>Exercícios</a>
+      <a href="progresso.html" class="ativo"><span><img src="Imagens/icons/progresso.svg" alt=""></span>Progresso</a>
+      <p class="grupoMenu">Projeto</p>
+      <a href="sobre.html"><span><img src="Imagens/icons/sobre.svg" alt=""></span>Sobre nós</a>
+      <a href="contato.html"><span><img src="Imagens/icons/contato.svg" alt=""></span>Contato</a>
+      <div class="caixaUsuario"><b class="nomeUsuario"></b><span class="detalheUsuario"></span><a class="linkEditarPerfil" href="editar-perfil.html" hidden>Editar perfil</a><button data-acao="sair" class="botaoUsuario"></button></div>
+    </aside>
+<div>
+<header id="barraSuperior">
+        <div class="logo"><a href="index.html" title="Ir para o início" aria-label="BeHealthier — ir para o início"><img src="Imagens/icons/esquilo-logo.svg" alt="BeHealthier"></a></div>
+        <span class="botaoCidade cidadeAtual" data-acao="irParaEntrega"></span>
+        <button class="botaoSacola" data-acao="abrirSacola"><img class="iconeSacolaTopo" src="Imagens/icons/Shopping_Cart_01.svg" alt=""> <span class="contadorSacola">0</span></button>
+      </header>
+<main id="conteudoPrincipal">
+<div class="faixaBeWell"><img src="bewell/img_sobre-nos/cerebro-pensnte-pequeno.png" alt=""><div><b>Be Well</b><span>Progresso</span></div></div>
+<div class="bw bw-progresso">
+    <section class="inicio">
+      <h1>Acompanhe a <span>sua jornada!</span></h1>
+      <div class="card-jornada-container">
+        <div class="card-metas">
+          <h2>Suas metas para o dia:</h2>
+          <p>Ganhe XP no jogo lá embaixo: 400 XP medalha de bronze, 800 XP de prata e 1200 XP de ouro!</p>
+
+          <div class="medalhas-conquista">
+            <img src="bewell/img_progresso/medalha-um.png" id="med-1" class="medalha-img opaca" alt="Medalha Bronze">
+            <img src="bewell/img_progresso/medalha-dois.png" id="med-2" class="medalha-img opaca" alt="Medalha Prata">
+            <img src="bewell/img_progresso/medalha-tres.png" id="med-3" class="medalha-img opaca" alt="Medalha Ouro">
+            <span id="medalha-texto"><strong>0/400</strong> XP para a medalha de bronze!</span>
+          </div>
+
+          <ul class="lista-tarefas" id="lista-tarefas">
+          </ul>
+          <p id="sem-meta-msg" class="texto-sem-meta">Sem metas cadastradas</p>
+          <p class="contador-tarefas"><strong id="contador">0/0</strong> Tarefas concluídas!</p>
+        </div>
+        <div class="imagem-castelo">
+          <img src="bewell/img_progresso/castelo.png" alt="Caminho para o castelo">
+        </div>
+      </div>
+    </section>
+
+    <section class="grafico">
+      <h2>Você está indo muito bem<span id="nome-usuario"></span>!</h2>
+
+      <div class="canvas-wrapper">
+        <canvas id="meuGrafico"></canvas>
+      </div>
+      <p class="legenda-grafico">XP ganho em cada dia da semana. Medalhas do dia: 100 XP bronze, 200 XP prata e 300 XP ouro.</p>
+
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </section>
+
+    <section class="exercicios">
+      <div class="exercicios-texto">
+        <h2>Prática de exercícios</h2>
+        <p>Dicas para desenvolver resistência e bem estar no esporte/atividade física:</p>
+
+        <ul class="exercicios-lista">
+          <li>Sempre se mantenha constante no exercício, por mais leve que seja!</li>
+          <li>Respeite os <span>limites do seu corpo</span>, não use pesos ou realize atividades que exigem demais de
+            você</li>
+          <li>Procure incluir exercícios simples no seu dia a dia!</li>
+          <li>Se você não tem muita experiência com esportes ou exercícios, procure realizar um desses em conjunto com
+            outras pessoas! Isso ajuda a não te sentir sozinho!</li>
+        </ul>
+      </div>
+
+      <div class="exercicios-img">
+        <img src="bewell/img_progresso/boneco.png" alt="imagem boneco">
+      </div>
+    </section>
+
+    <section class="sono">
+      <div class="semana">
+        <h2>Você reparou no seu sono essa semana?</h2>
+        <h3>Com a correria do dia-a-dia, muitas pessoas acabam deixando seu sono em segunda mão, mas você sabe a
+          importância dele para a sua saúde?</h3>
+        <ul>
+          <li>Melhora a memória e a aprendizagem;</li>
+          <li>Fortalece o sistema imunológico;</li>
+          <li>Reduz a chance de doenças crônicas;</li>
+        </ul>
+      </div>
+
+      <div class="regular">
+        <h2>Algumas sugestões para te ajudar a regular seu sono</h2>
+        <ul>
+          <li>Desligue as telas no mínimo <span>1 hora antes </span>de dormir</li>
+          <li>Crie um ritual do sono, para preparar seu corpo para o descanso</li>
+          <li>Deixe luzes apagadas ou baixas</li>
+          <li>Realize leituras</li>
+        </ul>
+      </div>
+    </section>
+
+<section class="arena" id="arena">
+      <div class="arena-topo">
+        <h2 class="arena-titulo" onclick="mostrarMenu()">BE WELL ARENA</h2>
+        <div class="status">
+          <span>NÍVEL <b id="nivel">1</b></span>
+          <div class="barra"><div id="barra-xp"></div></div>
+          <span><b id="xp">0</b> XP</span>
+        </div>
+      </div>
+
+      <div id="menu">
+        <p class="texto">Escolha seu treino de hoje:</p>
+
+        <div class="cards">
+          <div class="card corrida" onclick="abrirModo('corrida')">
+            <h2>Corrida</h2>
+            <p>Distância e tempo. Cada km vira XP.</p>
+          </div>
+          <div class="card academia" onclick="abrirModo('academia')">
+            <h2>Academia</h2>
+            <p>Carga, séries e repetições.</p>
+          </div>
+          <div class="card calistenia" onclick="abrirModo('calistenia')">
+            <h2>Calistenia</h2>
+            <p>Só o peso do seu corpo.</p>
+          </div>
+        </div>
+
+        <h3>Últimos treinos</h3>
+        <ul id="historico"></ul>
+
+        <button class="botao pequeno" onclick="apagarTudo()">Apagar progresso</button>
+      </div>
+
+      <div id="lista" class="escondido"></div>
+      <div id="exercicio" class="escondido"></div>
+      <div id="aviso"></div>
+    </section>
+
+  
+<div id="modal-meta" class="modal-fundo">
+    <div class="modal-conteudo">
+      <h3>Nova Meta</h3>
+      <p>Digite a meta que deseja adicionar (Máximo 3):</p>
+      <input type="text" id="input-meta-texto" placeholder="Ex: Beber 2L de água">
+      <div class="modal-acoes">
+        <button type="button" class="btn-cancelar" onclick="fecharModalMeta()">Cancelar</button>
+        <button type="button" class="btn-salvar" onclick="salvarMeta()">Salvar</button>
+      </div>
+    </div>
+  </div></div>
+<div id="aviso"></div>
+</main>
+<footer class="rodape">
+      <div class="rodapeConteudo">
+        <div class="rodapeMarca">
+          <a class="rodapeLogoLink" href="index.html" title="Ir para o início" aria-label="BeHealthier — ir para o início"><img class="rodapeLogo" src="Imagens/icons/esquilo-logo.svg" alt="BeHealthier"></a>
+          <p class="rodapeProjeto">Projeto da SEPE-IFC 2026</p>
+          <nav class="rodapeEquipe" aria-label="Equipe">
+            <h4 class="rodapeTitulo">Equipe</h4>
+            <a href="https://github.com/murilow-a16" target="_blank" rel="noopener noreferrer">Murilo Antonio de Almeida</a>
+            <a href="https://github.com/lucasdeamorimsilva" target="_blank" rel="noopener noreferrer">Lucas de Amorim Silva</a>
+            <a href="#" target="_blank" rel="noopener noreferrer">Enzo Melgarejo</a>
+            <a href="https://github.com/laredofe08" target="_blank" rel="noopener noreferrer">Felipe Laredo</a>
+            <a href="https://github.com/igorhayatoss-alt" target="_blank" rel="noopener noreferrer">Igor Hayato Sato</a>
+            <a href="https://github.com/HTironi" target="_blank" rel="noopener noreferrer">Henrique Tironi</a>
+          </nav>
+        </div>
+        <nav class="rodapeNavegacao" aria-label="Navegação do rodapé">
+          <h4 class="rodapeTitulo">Navegue</h4>
+          <a href="index.html">Início</a>
+          <a href="receitas.html">Receitas</a>
+          <a href="cardapio.html">Cardápio</a>
+          <a href="equilibrio.html">Equilíbrio</a>
+          <a href="dicas.html">Dicas</a>
+          <a href="entrega.html">Entrega</a>
+          <a href="videos.html">Vídeos</a>
+          <h4 class="rodapeTitulo rodapeTituloBeWell">Be Well</h4>
+          <a href="bewell.html">Be Well</a>
+          <a href="rotina.html">Rotina</a>
+          <a href="exercicios.html">Exercícios</a>
+          <a href="progresso.html">Progresso</a>
+          <a href="sobre.html">Sobre nós</a>
+          <a href="contato.html">Contato</a>
+        </nav>
+        <div class="rodapeConta">
+          <h4 class="rodapeTitulo">Sua conta</h4>
+          <b class="nomeUsuario"></b>
+          <span class="detalheUsuario"></span>
+          <a class="linkEditarPerfil" href="editar-perfil.html" hidden>Editar perfil</a>
+          <button type="button" class="botaoUsuario" data-acao="sair"></button>
+        </div>
+        <div class="rodapeLembrete">
+          <h4 class="rodapeTitulo">Quer lembrete por e-mail?</h4>
+          <form class="rodapeFormulario" data-formulario="lembreteRodape" onsubmit="return false" novalidate>
+            <input name="email" type="email" placeholder="Seu e-mail" aria-label="Seu e-mail" autocomplete="email" required>
+            <button class="botao botaoPequeno botaoAmarelo" type="submit" data-acao="enviarLembrete">Quero lembrete</button>
+            <p class="rodapeFormularioRetorno" role="status" aria-live="polite"></p>
+          </form>
+          <div class="rodapeContato">
+            <h4 class="rodapeTitulo">Fale com a gente</h4>
+            <a href="https://www.instagram.com/behealthier_ifc_araquari?stkn=Y2cxam0ybzNzejRj" target="_blank" rel="noopener noreferrer">Instagram: @behealthier_ifc_araquari</a>
+            <p>E-mail: behealthier67@gmail.com</p>
+            <p>Telefone: +55 47 99999-9999</p>
+          </div>
+        </div>
+      </div>
+      <p class="rodapeDireitos">© <span class="anoAtual"></span> BeHealthier</p>
+    </footer>
+</div>
+</div>
+<nav id="menuInferior">
+    <a href="index.html" class="ativo"><span><img src="Imagens/icons-preto/casa.svg" alt=""></span>Início</a>
+    <a href="receitas.html"><span><img src="Imagens/icons-preto/receitas.svg" alt=""></span>Receitas</a>
+    <a href="cardapio.html"><span><img src="Imagens/icons-preto/Calendar_Event.svg" alt=""></span>Cardápio</a>
+    <a href="equilibrio.html"><span><img src="Imagens/icons-preto/equilibrio.svg" alt=""></span>Equilíbrio</a>
+    <a href="#" data-acao="mais"><span><img src="Imagens/icons-preto/mais.svg" alt=""></span>Mais</a>
+  </nav>
+  <div class="sobreposicao" id="sobreposicaoModal">
+    <div class="caixaModal" id="caixaModalConteudo"></div>
+  </div>
+  <div class="aviso" id="avisoTemporario"></div>
+
+<script src="js/mini_jogo_dados.js"></script>
+<script src="js/mini_jogo.js"></script>
+<script src="js/progresso_grafico.js"></script>
+<script type="module" src="js/progresso_conta.js"></script>
+</body>
+</html>
