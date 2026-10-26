@@ -776,23 +776,23 @@ p.textoSecundario {
 }
 
 .bannerPrincipal.bannerInicio {
-    background-image: url('../Imagens/esquilo-fundo.png');
+    background-image: url('../../Imagens/esquilo-fundo.png');
 }
 
 .cardDestaque.cardDestaqueReceitas {
-    background-image: url('../Imagens/frutas.jpg');
+    background-image: url('../../Imagens/frutas.jpg');
 }
 
 .cardDestaque.cardDestaqueCardapio {
-    background-image: url('../Imagens/mesa.jpg');
+    background-image: url('../../Imagens/mesa.jpg');
 }
 
 .cardDestaque.cardDestaqueEquilibrio {
-    background-image: url('../Imagens/equilibrio.jpg');
+    background-image: url('../../Imagens/equilibrio.jpg');
 }
 
 .cardDestaque.cardDestaqueEntrega {
-    background-image: url('../Imagens/marmitas-row.jpg');
+    background-image: url('../../Imagens/marmitas-row.jpg');
 }
 
 @media (max-width: 600px) {

@@ -1,9 +1,9 @@
 const imgBronze = new Image();
-imgBronze.src = "bewell/img_progresso/medalha-um.png";
+imgBronze.src = "Imagens/bewell/img_progresso/medalha-um.png";
 const imgPrata = new Image();
-imgPrata.src = "bewell/img_progresso/medalha-dois.png";
+imgPrata.src = "Imagens/bewell/img_progresso/medalha-dois.png";
 const imgOuro = new Image();
-imgOuro.src = "bewell/img_progresso/medalha-tres.png";
+imgOuro.src = "Imagens/bewell/img_progresso/medalha-tres.png";
 
 const metasDia = [100, 200, 300];
 

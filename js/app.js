@@ -10,6 +10,10 @@ const linksDoMenuMais = [
     { arquivo: 'dicas.html', texto: 'Dicas', icone: 'lampada' },
     { arquivo: 'entrega.html', texto: 'Entrega', icone: 'entrega' },
     { arquivo: 'videos.html', texto: 'Vídeos', icone: 'Play' },
+    { arquivo: 'bewell.html', texto: 'Be Well', icone: 'bewell' },
+    { arquivo: 'rotina.html', texto: 'Rotina', icone: 'rotina' },
+    { arquivo: 'exercicios.html', texto: 'Exercícios', icone: 'exercicios' },
+    { arquivo: 'progresso.html', texto: 'Progresso', icone: 'progresso' },
     { arquivo: 'sobre.html', texto: 'Sobre nós', icone: 'sobre' },
     { arquivo: 'contato.html', texto: 'Contato', icone: 'contato' },
 ];
@@ -641,6 +645,9 @@ function atualizarElementosComuns() {
     definirTexto('.nomeUsuario', usuarioLogado ? usuarioLogado.nome : 'Visitante');
     definirTexto('.detalheUsuario', usuarioLogado ? usuarioLogado.email : 'Progresso só neste aparelho');
     definirTexto('.botaoUsuario', usuarioLogado ? 'Sair' : 'Entrar / criar conta');
+    document.querySelectorAll('.linkEditarPerfil').forEach(elemento => {
+        elemento.hidden = !usuarioLogado;
+    });
 
     document.querySelectorAll('[data-formulario="lembreteRodape"] input[name="email"]').forEach(campo => {
         if (usuarioLogado && !campo.value) campo.value = usuarioLogado.email;
@@ -965,80 +972,20 @@ function renderizarMantendoRolagem() {
 const api = {
     urlBase: '',
 
-    async gerarHash(senha) {
-        const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(senha));
-        return [...new Uint8Array(bytes)].map(byte => byte.toString(16).padStart(2, '0')).join('');
-    },
-
-    async requisitar(metodo, caminho, corpo) {
-        const token = localStorage.getItem(chavesArmazenamento.token) || '';
-        const resposta = await fetch(this.urlBase + caminho, {
-            method: metodo,
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + token,
-            },
-            body: corpo && JSON.stringify(corpo),
-        });
-        const json = await resposta.json();
-        if (!resposta.ok) throw new Error(json.erro || 'Erro no servidor');
-        return json;
-    },
-
-    obterUsuarios() {
-        try {
-            return JSON.parse(localStorage.getItem(chavesArmazenamento.usuarios) || '{}');
-        } catch (erro) {
-            return {};
-        }
-    },
-
     async cadastrar(nome, email, senha) {
-        if (this.urlBase) {
-            const json = await this.requisitar('POST', '/cadastro', { nome, email, senha });
-            localStorage.setItem(chavesArmazenamento.token, json.token);
-            return json.usuario;
-        }
-        const usuarios = this.obterUsuarios();
-        if (usuarios[email]) throw new Error('Este e-mail já está cadastrado');
-        usuarios[email] = { nome, hashSenha: await this.gerarHash(senha), estado: criarEstadoPadrao() };
-        localStorage.setItem(chavesArmazenamento.usuarios, JSON.stringify(usuarios));
-        return { nome, email };
+        return window.ponte.cadastrar(nome, email, senha);
     },
 
     async entrar(email, senha) {
-        if (this.urlBase) {
-            const json = await this.requisitar('POST', '/entrar', { email, senha });
-            localStorage.setItem(chavesArmazenamento.token, json.token);
-            return json.usuario;
-        }
-        const usuario = this.obterUsuarios()[email];
-        if (!usuario || usuario.hashSenha !== (await this.gerarHash(senha))) {
-            throw new Error('E-mail ou senha incorretos');
-        }
-        return { nome: usuario.nome, email };
+        return window.ponte.entrar(email, senha);
     },
 
-    async carregarEstado(email) {
-        if (this.urlBase) {
-            const json = await this.requisitar('GET', '/estado');
-            return json.estado;
-        }
-        const usuario = this.obterUsuarios()[email] || {};
-        return usuario.estado;
+    async carregarEstado() {
+        return window.ponte.carregarEstado();
     },
 
     salvarEstado(email, novoEstado) {
-        if (this.urlBase) {
-            this.requisitar('PUT', '/estado', { estado: novoEstado }).catch(() => {});
-            return;
-        }
-        const usuarios = this.obterUsuarios();
-        if (!usuarios[email]) return;
-        usuarios[email].estado = novoEstado;
-        try {
-            localStorage.setItem(chavesArmazenamento.usuarios, JSON.stringify(usuarios));
-        } catch (erro) {}
+        window.ponte.salvarEstado(novoEstado);
     },
 };
 
@@ -1415,10 +1362,11 @@ function acaoContinuarVisitante() {
     iniciarSessao(null);
 }
 
-function acaoSair() {
+async function acaoSair() {
     const estavaLogado = !!usuarioLogado;
     localStorage.removeItem(chavesArmazenamento.sessao);
     localStorage.removeItem(chavesArmazenamento.token);
+    if (estavaLogado && window.ponte) await window.ponte.sair();
     location.href = estavaLogado ? 'index.html' : 'login.html';
 }
 
@@ -1449,8 +1397,8 @@ async function acaoEnviarContato({ evento }) {
     const mensagem = { ...dados, pagina: location.pathname.split('/').pop() || 'index.html', data: new Date().toISOString() };
     elemento.disabled = true;
     try {
-        if (api.urlBase) {
-            await api.requisitar('POST', '/api/contato', mensagem);
+        if (window.ponte) {
+            await window.ponte.enviarContato(mensagem);
         } else {
             const lista = JSON.parse(localStorage.getItem(chavesArmazenamento.contatos) || '[]');
             lista.push(mensagem);
@@ -1488,8 +1436,7 @@ async function acaoEnviarLembrete({ evento }) {
 
     elemento.disabled = true;
     try {
-        if (api.urlBase) {
-            await api.requisitar('POST', '/api/lembrete', { email, pagina: location.pathname.split('/').pop() || 'index.html' });
+        if (false) {
         } else {
             const lista = JSON.parse(localStorage.getItem(chavesArmazenamento.lembretes) || '[]');
             if (!lista.includes(email)) lista.push(email);
@@ -1623,7 +1570,7 @@ function marcarAbaAtivaDaBarraInferior() {
 
 async function iniciarPagina() {
     try {
-        const usuarioSalvo = JSON.parse(localStorage.getItem(chavesArmazenamento.sessao) || 'null');
+        const usuarioSalvo = window.ponte ? await window.ponte.usuarioAtual() : null;
         if (usuarioSalvo) await iniciarSessao(usuarioSalvo);
         else if (paginaAtual != 'login') await iniciarSessao(null);
     } catch (erro) {

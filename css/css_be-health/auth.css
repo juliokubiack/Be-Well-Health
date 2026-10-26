@@ -39,7 +39,7 @@
 .bannerAutenticacao {
     flex: 1.1;
     background: var(--pessego) no-repeat center top / min(100%, 640px) auto;
-    background-image: url('../Imagens/esquilo-fundo.png');
+    background-image: url('../../Imagens/esquilo-fundo.png');
     position: relative;
     color: #fff;
     display: none;

@@ -2025,19 +2025,19 @@ padding: 10px;
 }
 
 .cardDestaque.cardDestaqueBeWell {
-  background-image: url('../bewell/img_exercicios/yoga.jpg');
+  background-image: url('../../Imagens/bewell/img_exercicios/yoga.jpg');
 }
 
 .cardDestaque.cardBeWellExercicios {
-  background-image: url('../bewell/img_exercicios/corrida.jpg');
+  background-image: url('../../Imagens/bewell/img_exercicios/corrida.jpg');
 }
 
 .cardDestaque.cardBeWellProgresso {
-  background-image: url('../bewell/img_exercicios/planilha.jpg');
+  background-image: url('../../Imagens/bewell/img_exercicios/planilha.jpg');
 }
 
 .cardDestaque.cardBeWellJogo {
-  background-image: url('../bewell/img_exercicios/superiores.jpg');
+  background-image: url('../../Imagens/bewell/img_exercicios/superiores.jpg');
 }
 
 @media (min-width: 900px) {
